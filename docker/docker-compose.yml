@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  apache:
+    image: php:apache
+    ports:
+      - "8080:80"
+    volumes:
+      - ./public:/var/www/html
+      - ./logs:/var/log/apache2
+    depends_on:
+      - mariadb
+    command: >
+      bash -c "
+      docker-php-ext-install mysqli && 
+      docker-php-ext-enable mysqli &&
+      a2enmod rewrite && 
+      apache2-foreground
+      "
+    environment:
+      DB_HOST: mariadb
+      DB_USER: root
+      DB_PASSWORD: example
+      DB_NAME: my_database
+
+  mariadb:
+    image: mariadb:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: my_database
+    volumes:
+      - db_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD", "mariadb-admin", "ping", "-h", "localhost", "-u", "root", "-p$${MYSQL_ROOT_PASSWORD}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  db_data:
