@@ -1,5 +1,6 @@
 logs/*
 !logs/.gitkeep
+!logs/apache/.gitkeep
 
 # IDE configs
 .idea
