@@ -2,6 +2,7 @@ services:
 
   apache:
     image: php:apache
+    container_name: ${COMPOSE_PROJECT_NAME}_apache
     ports:
       - "8080:80"
     volumes:
