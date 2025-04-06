@@ -17,3 +17,4 @@ services:
     container_name: ${COMPOSE_PROJECT_NAME}_php
     volumes:
       - ./../public:/var/www/html
+      - ./../logs/php:/var/log/php
