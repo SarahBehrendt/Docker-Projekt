@@ -18,3 +18,28 @@ services:
     volumes:
       - ./../public:/var/www/html
       - ./../logs/php:/var/log/php
+    depends_on:
+      - mariadb
+
+  mariadb:
+    container_name: ${COMPOSE_PROJECT_NAME}_mariadb
+    image: mariadb:10.3
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+    volumes:
+      - dbdata:/var/lib/mysql
+
+  phpmyadmin:
+    container_name: ${COMPOSE_PROJECT_NAME}_phpmyadmin
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: mariadb
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "8080:80"
+    depends_on:
+      - mariadb
+
+volumes:
+  dbdata:
