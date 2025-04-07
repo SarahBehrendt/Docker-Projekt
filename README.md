@@ -1,25 +1,33 @@
-# Docker Service Ports
+# Docker 
+## Images
+Apache https://hub.docker.com/_/httpd
+PHP https://hub.docker.com/_/php
+MariaDB https://hub.docker.com/_/mariadb
+phpmyadmin https://hub.docker.com/_/phpmyadmin
+
+## Docker Service Ports
 
 Dieses Dokument listet alle genutzten Ports und deren Zugriffswege auf.
 
 ## 📌 Port-Konfiguration
 
-| Service       | Container-Port | Host-Port | Zugangs-URL                 | Protokoll |
-|---------------|----------------|-----------|-----------------------------|-----------|
-| Apache (Web)  | 80             | 8080      | http://localhost:8080       | HTTP      |
-| phpMyAdmin    | 80             | 8081      | http://localhost:8081       | HTTP      |
-| MariaDB       | 3306           | 3306      | Nur intern nutzbar          | TCP       |
+| Service       | Container-Port | Host-Port | Zugangs-URL           | Protokoll |
+|---------------|----------------|-----------|-----------------------|-----------|
+| Apache (Web)  | 80             | 80        | http://localhost:80   | HTTP      |
+| phpMyAdmin    | 80             | 8080      | http://localhost:8080 | HTTP      |
+| MariaDB       | 3306           | -         | Nur intern nutzbar    | TCP       |
 
 ## 🚀 Quickstart
-```bash
-# Container starten
-docker-compose up -d
+### Container starten
+```
+docker-compose -f docker/docker-compose.yml up
+```
 
-# Status prüfen
+### Status prüfen
 docker-compose ps
 ```
 
-## 🔧 Port-Konflikte lösen
+### 🔧 Port-Konflikte lösen
 1. Belegte Ports finden:
    ```bash
    # Linux/macOS:
@@ -37,19 +45,19 @@ docker-compose ps
          - "8090:80"  # Geänderter Host-Port
    ```
 
-## ⚠️ Sicherheitshinweise
+### ⚠️ Sicherheitshinweise
 - MariaDB (3306) sollte **nicht** öffentlich exponiert werden
 - Für Produktion:
   - phpMyAdmin mit HTTPS schützen
   - Apache über Reverse-Proxy betreiben
 
-## 🛠️ Nützliche Befehle
+### 🛠️ Nützliche Befehle
 | Befehl                      | Wirkung                     |
 |-----------------------------|----------------------------|
 | `docker-compose logs -f`    | Live-Logs anzeigen         |
 | `docker-compose down -v`    | Container + Volumes löschen|
 
-### Rebuild docker
+#### Rebuild docker
 ```
 docker-compose -f docker/docker-compose.yml up --build
 ```

@@ -3,6 +3,8 @@ services:
     container_name: ${COMPOSE_PROJECT_NAME}_apache
     build:
       context: ./apache
+      args:
+        HTTPD_VERSION: ${HTTPD_VERSION}
     ports:
       - "80:80"
     volumes:
@@ -14,7 +16,35 @@ services:
   php:
     build:
       context: ./php
+      args:
+        PHP_VERSION: ${PHP_VERSION}
     container_name: ${COMPOSE_PROJECT_NAME}_php
     volumes:
       - ./../public:/var/www/html
       - ./../logs/php:/var/log/php
+    depends_on:
+      - mariadb
+
+  mariadb:
+    container_name: ${COMPOSE_PROJECT_NAME}_mariadb
+    image: mariadb:${DB_VERSION}
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - dbdata:/var/lib/mysql
+
+  phpmyadmin:
+    container_name: ${COMPOSE_PROJECT_NAME}_phpmyadmin
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: mariadb
+    ports:
+      - "8080:80"
+    depends_on:
+      - mariadb
+
+volumes:
+  dbdata:
