@@ -1,57 +1,20 @@
-version: '3.8'
-
 services:
   apache:
-    image: php:apache
+    container_name: ${COMPOSE_PROJECT_NAME}_apache
+    build:
+      context: ./apache
     ports:
-      - "8080:80"
+      - "80:80"
     volumes:
-      - ./public:/var/www/html
-      - ./logs:/var/log/apache2
+      - ./../public:/usr/local/apache2/htdocs
+      - ./../logs/apache:/usr/local/apache2/logs
     depends_on:
-      - mariadb
-    command: >
-      bash -c "
-      docker-php-ext-install mysqli && 
-      docker-php-ext-enable mysqli &&
-      a2enmod rewrite && 
-      apache2-foreground
-      "
-    environment:
-      DB_HOST: mariadb
-      DB_USER: root
-      DB_PASSWORD: example
-      DB_NAME: my_database
+      - php
 
-  mariadb:
-    image: mariadb:latest
-    environment:
-      MYSQL_ROOT_PASSWORD: example
-      MYSQL_DATABASE: my_database
-      MYSQL_ROOT_HOST: '%'
+  php:
+    build:
+      context: ./php
+    container_name: ${COMPOSE_PROJECT_NAME}_php
     volumes:
-      - db_data:/var/lib/mysql
-      - ./docker/mariadb/init:/docker-entrypoint-initdb.d
-    ports:
-      - "3306:3306"
-    healthcheck:
-      test: ["CMD", "mariadb-admin", "ping", "-h", "localhost", "-u", "root", "-p$${MYSQL_ROOT_PASSWORD}"]
-      interval: 5s
-      timeout: 5s
-      retries: 5
-
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    depends_on:
-      - mariadb
-    ports:
-      - "8081:80"
-    environment:
-      PMA_HOST: mariadb
-      MYSQL_ROOT_PASSWORD: example
-      UPLOAD_LIMIT: 128M
-      PMA_ABSOLUTE_URI: http://localhost:8081/
-    restart: unless-stopped
-
-volumes:
-  db_data:
+      - ./../public:/var/www/html
+      - ./../logs/php:/var/log/php

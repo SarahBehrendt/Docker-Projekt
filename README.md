@@ -49,6 +49,11 @@ docker-compose ps
 | `docker-compose logs -f`    | Live-Logs anzeigen         |
 | `docker-compose down -v`    | Container + Volumes löschen|
 
+### Rebuild docker
+```
+docker-compose -f docker/docker-compose.yml up --build
+```
+
 ## 📎 Support
 Bei Port-Problemen:
 1. Container stoppen: `docker-compose down`
