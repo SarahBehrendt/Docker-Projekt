@@ -4,6 +4,7 @@ Apache https://hub.docker.com/_/httpd
 PHP https://hub.docker.com/_/php
 MariaDB https://hub.docker.com/_/mariadb
 phpmyadmin https://hub.docker.com/_/phpmyadmin
+MailHog https://hub.docker.com/r/mailhog/mailhog
 
 ## Docker Service Ports
 
@@ -11,11 +12,13 @@ Dieses Dokument listet alle genutzten Ports und deren Zugriffswege auf.
 
 ## 📌 Port-Konfiguration
 
-| Service       | Container-Port | Host-Port | Zugangs-URL           | Protokoll |
-|---------------|----------------|-----------|-----------------------|-----------|
-| Apache (Web)  | 80             | 80        | http://localhost:80   | HTTP      |
-| phpMyAdmin    | 80             | 8080      | http://localhost:8080 | HTTP      |
-| MariaDB       | 3306           | -         | Nur intern nutzbar    | TCP       |
+| Service      | Container-Port | Host-Port | Zugangs-URL           | Protokoll |
+|--------------|----------------|-----------|-----------------------|-----------|
+| Apache (Web) | 80             | 80        | http://localhost:80   | HTTP      |
+| phpMyAdmin   | 80             | 8080      | http://localhost:8080 | HTTP      |
+| MariaDB      | 3306           | -         | Nur intern nutzbar    | TCP       |
+| MailHog      | 8025           | 8025      | http://localhost:8025 | HTTP      |
+
 
 ## 🚀 Quickstart
 ### Container starten
