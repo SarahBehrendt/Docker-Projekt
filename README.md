@@ -10,15 +10,14 @@ project-root/
 │   ├── php/               # PHP-Konfigurationen und Dockerfile  
 │   ├── docker-compose.yml # Haupt-Docker-Compose-Datei  
 │   ├── logs/              # Log-Dateien  
-│   └── mailhog/           # MailHog Konfigurationen (optional)  
+│   ├── mailhog/           # MailHog Konfigurationen (optional)  
+│   └── .env               # Umgebungsvariablen (z.B. DB-Konfigurationen)  
 │  
 ├── public/                # Öffentliche Web-Dateien (z.B. HTML, CSS, JS)  
 │   ├── index.html         # Haupt-HTML-Datei  
-│   └── …                # Weitere Web-Dateien  
-│  
-├── .env                   # Umgebungsvariablen (z.B. DB-Konfigurationen)  
+│   └── …                  # Weitere Web-Dateien  
 ├── README.md              # Dokumentation des Projekts  
-└── …                    # Weitere Projektdateien  
+└── …                      # Weitere Projektdateien  
 ```
 
 ## 📂 Detaillierte Beschreibung
@@ -29,13 +28,11 @@ project-root/
     - `apache/`: Hier sind alle Apache-Konfigurationsdateien und das zugehörige Dockerfile enthalten.
     - `php/`: PHP-Konfigurationsdateien und Dockerfile.
     - `logs/`: Hier landen alle Log-Dateien (Apache, PHP, MySQL) für die einfache Analyse.
+    - `.env`: Enthält alle Umgebungsvariablen, die in `docker-compose.yml` verwendet werden (z.B. Datenbank-Benutzer, Passwörter, Versionen).
 
 - **public/**
     - Dieser Ordner enthält alle öffentlichen Web-Dateien, die von Apache bedient werden.
     - `index.html` ist die Standard-Datei, die aufgerufen wird, wenn der Webserver läuft.
-
-- **.env**
-    - Enthält alle Umgebungsvariablen, die in `docker-compose.yml` verwendet werden (z.B. Datenbank-Benutzer, Passwörter, Versionen).
 
 
 ## Verwendete Images
