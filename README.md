@@ -1,10 +1,10 @@
 # Docker 
 ## Images
-Apache https://hub.docker.com/_/httpd
-PHP https://hub.docker.com/_/php
-MariaDB https://hub.docker.com/_/mariadb
-phpmyadmin https://hub.docker.com/_/phpmyadmin
-MailHog https://hub.docker.com/r/mailhog/mailhog
+Apache https://hub.docker.com/_/httpd  
+PHP https://hub.docker.com/_/php  
+MariaDB https://hub.docker.com/_/mariadb  
+phpmyadmin https://hub.docker.com/_/phpmyadmin  
+MailHog https://hub.docker.com/r/mailhog/mailhog  
 
 ## Docker Service Ports
 
