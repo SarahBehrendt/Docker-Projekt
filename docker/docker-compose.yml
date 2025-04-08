@@ -53,5 +53,18 @@ services:
     ports:
       - "8025:8025"
 
+  nginx:
+    container_name: ${COMPOSE_PROJECT_NAME}_nginx
+    build:
+      context: ./nginx/..
+      dockerfile: ./nginx/Dockerfile
+      args:
+        NGINX_VERSION: ${NGINX_VERSION}
+    ports:
+      - "8088:80"
+      - "8443:443"
+    depends_on:
+      - apache
+
 volumes:
   dbdata:
