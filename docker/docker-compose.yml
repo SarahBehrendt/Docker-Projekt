@@ -28,7 +28,11 @@ services:
 
   mariadb:
     container_name: ${COMPOSE_PROJECT_NAME}_mariadb
-    image: mariadb:${DB_VERSION}
+    build:
+      context: ./mariadb
+      dockerfile: Dockerfile
+      args:
+        DB_VERSION: ${DB_VERSION}
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
       MYSQL_DATABASE: ${DB_NAME}
@@ -36,6 +40,7 @@ services:
       MYSQL_PASSWORD: ${DB_PASSWORD}
     volumes:
       - dbdata:/var/lib/mysql
+      - ./../logs/mysql:/var/log/mysql
 
   phpmyadmin:
     container_name: ${COMPOSE_PROJECT_NAME}_phpmyadmin
@@ -63,6 +68,8 @@ services:
     ports:
       - "8088:80"
       - "8443:443"
+    volumes:
+      - ./../logs/nginx:/var/log/nginx:cached
     depends_on:
       - apache
 

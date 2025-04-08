@@ -1,6 +1,9 @@
 logs/*
 !logs/.gitkeep
 !logs/apache/.gitkeep
+!logs/php/.gitkeep
+!logs/nginx/.gitkeep
+!logs/mysql/.gitkeep
 
 # IDE configs
 .idea
