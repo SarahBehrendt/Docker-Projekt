@@ -38,7 +38,7 @@ services:
 
   phpmyadmin:
     container_name: ${COMPOSE_PROJECT_NAME}_phpmyadmin
-    image: phpmyadmin/phpmyadmin
+    image: phpmyadmin/phpmyadmin:${PHPMYADMIN_VERSION}
     environment:
       PMA_HOST: mariadb
     ports:
@@ -48,7 +48,7 @@ services:
 
   mailhog:
     container_name: ${COMPOSE_PROJECT_NAME}_mailhog
-    image: mailhog/mailhog
+    image: mailhog/mailhog:${MAILHOG_VERSION}
     ports:
       - "8025:8025"
 
