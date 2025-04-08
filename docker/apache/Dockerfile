@@ -1,4 +1,5 @@
 ARG HTTPD_VERSION
 FROM httpd:${HTTPD_VERSION}
 
-COPY httpd.conf /usr/local/apache2/conf/httpd.conf
+RUN echo 'Include conf/extra/httpd-vhosts.conf' >> /usr/local/apache2/conf/httpd.conf
+COPY ./httpd-vhosts.conf /usr/local/apache2/conf/extra/
